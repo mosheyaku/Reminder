@@ -44,7 +44,7 @@ public class Date implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Date date = (Date) obj;
-        return day == date.day && month == date.month && year == date.year;
+        return day == date.day && month.equals(date.month) && year == date.year;
     }
 
     @Override
