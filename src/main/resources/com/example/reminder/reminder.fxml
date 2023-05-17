@@ -25,7 +25,7 @@
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
          <Button mnemonicParsing="false" onAction="#savePressed" text="Save" />
-         <Button mnemonicParsing="false" onAction="#loadPresserd" text="Load" />
+         <Button mnemonicParsing="false" onAction="#loadPressed" text="Load" />
       </children>
    </HBox>
 </VBox>
