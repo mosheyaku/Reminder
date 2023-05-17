@@ -72,7 +72,7 @@ public class ReminderController {
         hashmap.put(getCurrentDate(), text);
         if(!hasClosingEvent) {
             hasClosingEvent = true;
-    //        addClosingEvent();
+            addClosingEvent();
         }
     }
 
@@ -170,11 +170,11 @@ public class ReminderController {
 
     }
 
-//    private void addClosingEvent() {
-//        Stage stage = (Stage) ((Node) vbox).getScene().getWindow();
-//        stage.getScene().getWindow().addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event1 -> {
-//            writeToFile();
-//        });
-//    }
+    private void addClosingEvent() {
+        Stage stage = (Stage) ((Node) vbox).getScene().getWindow();
+        stage.getScene().getWindow().addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event1 -> {
+            writeToFile();
+        });
+    }
 
 }
