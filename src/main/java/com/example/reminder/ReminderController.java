@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -110,6 +109,7 @@ public class ReminderController {
     }
 
     private ComboBox setDaysOfMonths(String month) {
+
         ComboBox days = new ComboBox<>();
         int daysInMonth;
         switch (month) {
