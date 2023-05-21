@@ -11,7 +11,7 @@ public class Reminder extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Reminder.class.getResource("reminder.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 370, 300);
         stage.setTitle("Reminder");
         stage.setScene(scene);
         stage.show();
