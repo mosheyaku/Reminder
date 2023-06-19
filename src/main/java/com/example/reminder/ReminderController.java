@@ -13,6 +13,10 @@ import javafx.stage.WindowEvent;
 import java.io.*;
 import java.util.HashMap;
 
+/**
+ * The ReminderController class controls the behavior of the Reminder application's user interface.
+ * It is responsible for handling user interactions and managing data storage.
+ */
 public class ReminderController {
 
     @FXML
@@ -30,29 +34,31 @@ public class ReminderController {
     @FXML
     private VBox vbox;
 
-
     private enum Months {Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec}
-
 
     private HashMap<Date, String> hashmap;
     private final int SHORT_MONTH = 28;
-
     private final int MEDIUM_MONTH = 30;
-
     private final int LONG_MONTH = 31;
-
     private final int FIRST_YEAR = 2020;
-
     private final int LAST_YEAR = 2025;
+    private boolean hasClosingEvent = false;
 
-    private boolean hasClosingEvent=false;
-
-    public void initialize(){
+    /**
+     * Initializes the ReminderController after its root element has been processed.
+     * It sets up the combo boxes, reads data from a file, and prepares for the closing event.
+     */
+    public void initialize() {
         hashmap = new HashMap<Date, String>();
         setComboBoxes();
         readFromFile();
     }
 
+    /**
+     * Retrieves the current date selected in the combo boxes.
+     *
+     * @return The current date.
+     */
     private Date getCurrentDate() {
         return new Date(Integer.parseInt(dayComboBox.getValue()),
                 monthComboBox.getValue(),
@@ -69,7 +75,7 @@ public class ReminderController {
     void savePressed(ActionEvent event) {
         String text = textArea.getText();
         hashmap.put(getCurrentDate(), text);
-        if(!hasClosingEvent) {
+        if (!hasClosingEvent) {
             hasClosingEvent = true;
             addClosingEvent();
         }
@@ -93,7 +99,9 @@ public class ReminderController {
         textArea.setText("");
     }
 
-
+    /**
+     * Sets up the combo boxes for day, month, and year.
+     */
     private void setComboBoxes() {
         for (int i = 1; i <= LONG_MONTH; i++)
             dayComboBox.getItems().add(i + "");
@@ -108,8 +116,13 @@ public class ReminderController {
         yearComboBox.setValue(FIRST_YEAR + "");
     }
 
+    /**
+     * Sets the number of days in a month for the given month.
+     *
+     * @param month The month for which to set the number of days.
+     * @return A ComboBox containing the days of the month.
+     */
     private ComboBox setDaysOfMonths(String month) {
-
         ComboBox days = new ComboBox<>();
         int daysInMonth;
         switch (month) {
@@ -131,6 +144,11 @@ public class ReminderController {
         return days;
     }
 
+    /**
+     * Opens a file chooser dialog and returns the selected file.
+     *
+     * @return The selected file or null if no file is selected.
+     */
     private File getFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Please select file:");
@@ -138,6 +156,9 @@ public class ReminderController {
         return fileChooser.showOpenDialog(null);
     }
 
+    /**
+     * Reads the data from a file and populates the hashmap with the stored data.
+     */
     private void readFromFile() {
         File file = getFile();
         if (file != null) {
@@ -151,9 +172,11 @@ public class ReminderController {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
+    /**
+     * Writes the hashmap data to a file.
+     */
     private void writeToFile() {
         File file = getFile();
         if (file != null) {
@@ -167,14 +190,16 @@ public class ReminderController {
                 System.out.println("Error 2");
             }
         }
-
     }
 
+    /**
+     * Adds a closing event handler to the application's primary stage.
+     * When the window is closed, the data is written to a file.
+     */
     private void addClosingEvent() {
         Stage stage = (Stage) ((Node) vbox).getScene().getWindow();
         stage.getScene().getWindow().addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, event1 -> {
             writeToFile();
         });
     }
-
 }
